@@ -16,5 +16,9 @@ E:\c#\autoselenium\obj\Debug\AutoSelenium.csproj.GenerateResource.Cache
 E:\c#\autoselenium\bin\Debug\AutoSelenium.exe
 E:\c#\autoselenium\bin\Debug\AutoSelenium.pdb
 E:\c#\autoselenium\obj\Debug\AutoSelenium.UCClick.resources
-E:\c#\autoselenium\obj\Debug\AutoSelenium.csprojResolveAssemblyReference.cache
 E:\c#\autoselenium\obj\Debug\AutoSelenium.UCSend.resources
+E:\c#\autoselenium\bin\Debug\WebDriver.dll
+E:\c#\autoselenium\bin\Debug\WebDriver.Support.dll
+E:\c#\autoselenium\bin\Debug\WebDriver.xml
+E:\c#\autoselenium\bin\Debug\WebDriver.Support.xml
+E:\c#\autoselenium\obj\Debug\AutoSelenium.UCOpenSelenium.resources

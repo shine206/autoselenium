@@ -11,6 +11,7 @@ namespace AutoSelenium
 {
     public partial class Form1 : Form
     {
+        private UCOpenSelenium ucOpen = new UCOpenSelenium();
         private UCGotoURL ucURL = new UCGotoURL();
         private UCClick ucClick = new UCClick();
         private UCSend ucSend = new UCSend();
@@ -34,6 +35,10 @@ namespace AutoSelenium
             {
                 case 0:
                     grbAction.Controls.Clear();
+                    ucOpen.Left = 6;
+                    ucOpen.Top = 18;
+                    grbAction.Height = ucOpen.Height + 30;
+                    grbAction.Controls.Add(ucOpen);
                     break;
                 case 1:
                     grbAction.Controls.Clear();
@@ -56,6 +61,9 @@ namespace AutoSelenium
                     grbAction.Height = ucSend.Height + 30;
                     grbAction.Controls.Add(ucSend);
                     break;
+                case 6:
+                    grbAction.Controls.Clear();
+                    break;
                 default:
                     MessageBox.Show("Chưa có user control");
                     break;
@@ -68,7 +76,7 @@ namespace AutoSelenium
             if (action.ToLower().Contains("open selenium"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action);
+                string script = fn.ActionToString(action,"",ucOpen.browser);
                 lvScript.Items.Add(fn.AddScipt(id, action,script));
             }
             else if (action.ToLower().Contains("go to url"))
@@ -76,18 +84,24 @@ namespace AutoSelenium
                 int id = lvScript.Items.Count + 1;
                 string script = fn.ActionToString(action, ucURL.URL);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
+                ucURL.URL = "";
             }
             else if (action.ToLower().Contains("click"))
             {
                 int id = lvScript.Items.Count + 1;
                 string script = fn.ActionToString(action,"",ucClick.byElement,ucClick.element);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
+                ucClick.byElement = "";
+                ucClick.element = "";
             }
             else if (action.ToLower().Contains("send"))
             {
                 int id = lvScript.Items.Count + 1;
                 string script = fn.ActionToString(action,"", ucSend.byElement, ucSend.element, ucSend.key);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
+                ucSend.byElement = "";
+                ucSend.element = "";
+                ucSend.key = "";
             }
             else if (action.ToLower().Contains("sleep"))
             {
@@ -95,10 +109,16 @@ namespace AutoSelenium
                 string script = fn.ActionToString(action, ucClick.byElement, ucClick.element);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
             }
-            else if (action.ToLower().Contains("Wait Element"))
+            else if (action.ToLower().Contains("wait element"))
             {
                 int id = lvScript.Items.Count + 1;
                 string script = fn.ActionToString(action, ucClick.byElement, ucClick.element);
+                lvScript.Items.Add(fn.AddScipt(id, action, script));
+            }
+            else if (action.ToLower().Contains("close selenium"))
+            {
+                int id = lvScript.Items.Count + 1;
+                string script = fn.ActionToString(action);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
             }
 

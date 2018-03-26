@@ -126,7 +126,8 @@
             "Click",
             "Send",
             "Sleep",
-            "Wait Element"});
+            "Wait Element",
+            "Close Selenium"});
             this.cbbAction.Location = new System.Drawing.Point(63, 10);
             this.cbbAction.Name = "cbbAction";
             this.cbbAction.Size = new System.Drawing.Size(168, 24);

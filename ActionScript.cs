@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
 
 namespace AutoSelenium
 {
     class ActionScript
     {
+        private IWebDriver driver;
         public Script[] arrayScript
         {
             get; set;
@@ -51,7 +55,44 @@ namespace AutoSelenium
         {
             for (int i = 0; i < arrayScript.Length; i++)
             {
-                Console.WriteLine(arrayScript[i].Action);    
+                switch (arrayScript[i].Action)
+                {
+                    case "open selenium":
+                        if (arrayScript[i].By.Contains("FireFox"))
+                        {
+                            driver = new FirefoxDriver();   
+                        }
+                        else
+                        {
+                            driver = new ChromeDriver();
+                        }
+                        break;
+                    case "go to url":
+                        driver.Url = arrayScript[i].Url;
+                        break;
+                    case "click":
+                        if (arrayScript[i].By.Contains("Xpath"))
+                            driver.FindElement(By.XPath(""+arrayScript[i].Element)).Click();
+                        else if (arrayScript[i].By.Contains("Class"))
+                            driver.FindElement(By.ClassName(arrayScript[i].Element)).Click();
+                        else
+                            driver.FindElement(By.Id(arrayScript[i].Element)).Click();
+                        break;
+                    case "send":
+                        if (arrayScript[i].By.Contains("Xpath"))
+                            driver.FindElement(By.XPath(arrayScript[i].Element)).SendKeys(arrayScript[i].Key);
+                        else if (arrayScript[i].By.Contains("Class"))
+                            driver.FindElement(By.ClassName(arrayScript[i].Element)).SendKeys(arrayScript[i].Key);
+                        else
+                            driver.FindElement(By.Id(arrayScript[i].Element)).SendKeys(arrayScript[i].Key);
+                        break;
+                    case "wait element":
+                        
+                        break;
+                    default:
+                        driver.Dispose();
+                        break;
+                }    
             }
             
         }
