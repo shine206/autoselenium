@@ -16,6 +16,7 @@ namespace AutoSelenium
         private UCClick ucClick = new UCClick();
         private UCSend ucSend = new UCSend();
         private Function fn = new Function();
+        private UCSleep ucSleep = new UCSleep();
         private ActionScript actionScript = new ActionScript();
 
         public Form1()
@@ -60,6 +61,13 @@ namespace AutoSelenium
                     ucSend.Top = 18;
                     grbAction.Height = ucSend.Height + 30;
                     grbAction.Controls.Add(ucSend);
+                    break;
+                case 4:
+                    grbAction.Controls.Clear();
+                    ucSleep.Left = 6;
+                    ucSleep.Top = 18;
+                    grbAction.Height = ucSleep.Height + 30;
+                    grbAction.Controls.Add(ucSleep);
                     break;
                 case 6:
                     grbAction.Controls.Clear();
