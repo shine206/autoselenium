@@ -1,0 +1,9 @@
+E:\C#\AutoSelenium\AutoSelenium\bin\Debug\AutoSelenium.exe
+E:\C#\AutoSelenium\AutoSelenium\bin\Debug\AutoSelenium.pdb
+E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.Form1.resources
+E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.Properties.Resources.resources
+E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.UCGotoURL.resources
+E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.csproj.GenerateResource.Cache
+E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.exe
+E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.pdb
+E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.csprojResolveAssemblyReference.cache
