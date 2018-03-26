@@ -34,7 +34,8 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pnAction = new System.Windows.Forms.GroupBox();
+            this.btnRunScript = new System.Windows.Forms.Button();
+            this.grbAction = new System.Windows.Forms.GroupBox();
             this.cbbAction = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddToSrcipt = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnRunScript = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +88,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.btnRunScript);
-            this.panel1.Controls.Add(this.pnAction);
+            this.panel1.Controls.Add(this.grbAction);
             this.panel1.Controls.Add(this.cbbAction);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnAddToSrcipt);
@@ -97,20 +97,31 @@
             this.panel1.Size = new System.Drawing.Size(240, 513);
             this.panel1.TabIndex = 1;
             // 
-            // pnAction
+            // btnRunScript
             // 
-            this.pnAction.Location = new System.Drawing.Point(9, 40);
-            this.pnAction.Name = "pnAction";
-            this.pnAction.Size = new System.Drawing.Size(222, 100);
-            this.pnAction.TabIndex = 4;
-            this.pnAction.TabStop = false;
-            this.pnAction.Text = "Options";
+            this.btnRunScript.Location = new System.Drawing.Point(54, 458);
+            this.btnRunScript.Name = "btnRunScript";
+            this.btnRunScript.Size = new System.Drawing.Size(136, 45);
+            this.btnRunScript.TabIndex = 5;
+            this.btnRunScript.Text = "Run Script";
+            this.btnRunScript.UseVisualStyleBackColor = true;
+            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
+            // 
+            // grbAction
+            // 
+            this.grbAction.Location = new System.Drawing.Point(9, 40);
+            this.grbAction.Name = "grbAction";
+            this.grbAction.Size = new System.Drawing.Size(222, 100);
+            this.grbAction.TabIndex = 4;
+            this.grbAction.TabStop = false;
+            this.grbAction.Text = "Options";
             // 
             // cbbAction
             // 
             this.cbbAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbAction.FormattingEnabled = true;
             this.cbbAction.Items.AddRange(new object[] {
+            "Open Selenium",
             "Go to URL",
             "Click",
             "Send",
@@ -154,7 +165,6 @@
             this.lvScript.TabIndex = 2;
             this.lvScript.UseCompatibleStateImageBehavior = false;
             this.lvScript.View = System.Windows.Forms.View.Details;
-            this.lvScript.VirtualMode = true;
             // 
             // columnHeader1
             // 
@@ -171,16 +181,6 @@
             // 
             this.columnHeader3.Text = "Script";
             this.columnHeader3.Width = 500;
-            // 
-            // btnRunScript
-            // 
-            this.btnRunScript.Location = new System.Drawing.Point(54, 458);
-            this.btnRunScript.Name = "btnRunScript";
-            this.btnRunScript.Size = new System.Drawing.Size(136, 45);
-            this.btnRunScript.TabIndex = 5;
-            this.btnRunScript.Text = "Run Script";
-            this.btnRunScript.UseVisualStyleBackColor = true;
-            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
             // 
             // Form1
             // 
@@ -218,7 +218,7 @@
         private System.Windows.Forms.ComboBox cbbAction;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAddToSrcipt;
-        private System.Windows.Forms.GroupBox pnAction;
+        private System.Windows.Forms.GroupBox grbAction;
         private System.Windows.Forms.ListView lvScript;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;

@@ -55,11 +55,23 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Script.cs" />
+    <Compile Include="UCClick.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCClick.Designer.cs">
+      <DependentUpon>UCClick.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCGotoURL.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UCGotoURL.Designer.cs">
       <DependentUpon>UCGotoURL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCSend.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCSend.Designer.cs">
+      <DependentUpon>UCSend.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -73,8 +85,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UCClick.resx">
+      <DependentUpon>UCClick.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCGotoURL.resx">
       <DependentUpon>UCGotoURL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCSend.resx">
+      <DependentUpon>UCSend.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

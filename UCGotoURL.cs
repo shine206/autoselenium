@@ -21,11 +21,6 @@ namespace AutoSelenium
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void UCGotoURL_Load(object sender, EventArgs e)
         {
 

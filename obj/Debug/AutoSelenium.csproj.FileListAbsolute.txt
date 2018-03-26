@@ -7,3 +7,14 @@ E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.csproj.GenerateResource.C
 E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.exe
 E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.pdb
 E:\C#\AutoSelenium\AutoSelenium\obj\Debug\AutoSelenium.csprojResolveAssemblyReference.cache
+E:\c#\autoselenium\obj\Debug\AutoSelenium.exe
+E:\c#\autoselenium\obj\Debug\AutoSelenium.pdb
+E:\c#\autoselenium\obj\Debug\AutoSelenium.Form1.resources
+E:\c#\autoselenium\obj\Debug\AutoSelenium.Properties.Resources.resources
+E:\c#\autoselenium\obj\Debug\AutoSelenium.UCGotoURL.resources
+E:\c#\autoselenium\obj\Debug\AutoSelenium.csproj.GenerateResource.Cache
+E:\c#\autoselenium\bin\Debug\AutoSelenium.exe
+E:\c#\autoselenium\bin\Debug\AutoSelenium.pdb
+E:\c#\autoselenium\obj\Debug\AutoSelenium.UCClick.resources
+E:\c#\autoselenium\obj\Debug\AutoSelenium.csprojResolveAssemblyReference.cache
+E:\c#\autoselenium\obj\Debug\AutoSelenium.UCSend.resources
