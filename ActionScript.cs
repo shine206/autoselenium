@@ -18,10 +18,10 @@ namespace AutoSelenium
             get; set;
         }
 
-        private Dictionary<string, string> filterScript(string actionScript)
+        public Dictionary<string, string> filterScript(string actionScript)
         { 
             //Action={0}|URL={1}|By={2}|Element={3}|Key={4}|Sleep={5}
-            Match match = Regex.Match(actionScript , @"Action=(.*?)\|URL=(.*?)\|By=(.*?)\|Element=(.*?)\|Key=(.*?)\|Sleep=(.*?)");
+            Match match = Regex.Match(actionScript , @"Action=(.*?)\|URL=(.*?)\|By=(.*?)\|Element=(.*?)\|Key=(.*?)\|Sleep=(.*?)\|");
             return new Dictionary<string, string>{
                 {"action", match.Groups[1].Value},
                 {"url", match.Groups[2].Value},

@@ -15,10 +15,15 @@ namespace AutoSelenium
         {
             InitializeComponent();
         }
-        public int time
+        public string time
         {
-            get { return int.Parse(txtTime.Text); }
-            set { txtTime.Text = value.ToString(); }
+            get { return txtTime.Text; }
+            set { txtTime.Text = value; }
+        }
+
+        private void UCSleep_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

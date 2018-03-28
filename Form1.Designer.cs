@@ -34,6 +34,9 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnTestScript = new System.Windows.Forms.Button();
             this.btnRunScript = new System.Windows.Forms.Button();
             this.grbAction = new System.Windows.Forms.GroupBox();
             this.cbbAction = new System.Windows.Forms.ComboBox();
@@ -87,6 +90,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btnUpdate);
+            this.panel1.Controls.Add(this.btnTestScript);
             this.panel1.Controls.Add(this.btnRunScript);
             this.panel1.Controls.Add(this.grbAction);
             this.panel1.Controls.Add(this.cbbAction);
@@ -97,11 +103,40 @@
             this.panel1.Size = new System.Drawing.Size(240, 513);
             this.panel1.TabIndex = 1;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(68, 379);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(95, 45);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Delete script";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(123, 311);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(100, 45);
+            this.btnUpdate.TabIndex = 7;
+            this.btnUpdate.Text = "Update script";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnTestScript
+            // 
+            this.btnTestScript.Location = new System.Drawing.Point(26, 458);
+            this.btnTestScript.Name = "btnTestScript";
+            this.btnTestScript.Size = new System.Drawing.Size(86, 45);
+            this.btnTestScript.TabIndex = 6;
+            this.btnTestScript.Text = "Test script";
+            this.btnTestScript.UseVisualStyleBackColor = true;
+            this.btnTestScript.Click += new System.EventHandler(this.btnTestScript_Click);
+            // 
             // btnRunScript
             // 
-            this.btnRunScript.Location = new System.Drawing.Point(54, 458);
+            this.btnRunScript.Location = new System.Drawing.Point(130, 458);
             this.btnRunScript.Name = "btnRunScript";
-            this.btnRunScript.Size = new System.Drawing.Size(136, 45);
+            this.btnRunScript.Size = new System.Drawing.Size(86, 45);
             this.btnRunScript.TabIndex = 5;
             this.btnRunScript.Text = "Run Script";
             this.btnRunScript.UseVisualStyleBackColor = true;
@@ -145,9 +180,9 @@
             // 
             // btnAddToSrcipt
             // 
-            this.btnAddToSrcipt.Location = new System.Drawing.Point(54, 399);
+            this.btnAddToSrcipt.Location = new System.Drawing.Point(19, 311);
             this.btnAddToSrcipt.Name = "btnAddToSrcipt";
-            this.btnAddToSrcipt.Size = new System.Drawing.Size(136, 45);
+            this.btnAddToSrcipt.Size = new System.Drawing.Size(98, 45);
             this.btnAddToSrcipt.TabIndex = 0;
             this.btnAddToSrcipt.Text = "Add to script";
             this.btnAddToSrcipt.UseVisualStyleBackColor = true;
@@ -166,6 +201,7 @@
             this.lvScript.TabIndex = 2;
             this.lvScript.UseCompatibleStateImageBehavior = false;
             this.lvScript.View = System.Windows.Forms.View.Details;
+            this.lvScript.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvScript_ItemSelectionChanged);
             // 
             // columnHeader1
             // 
@@ -225,6 +261,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button btnRunScript;
+        private System.Windows.Forms.Button btnTestScript;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button button1;
     }
 }
 

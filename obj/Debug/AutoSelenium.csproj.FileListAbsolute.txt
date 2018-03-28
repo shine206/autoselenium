@@ -22,3 +22,5 @@ E:\c#\autoselenium\bin\Debug\WebDriver.Support.dll
 E:\c#\autoselenium\bin\Debug\WebDriver.xml
 E:\c#\autoselenium\bin\Debug\WebDriver.Support.xml
 E:\c#\autoselenium\obj\Debug\AutoSelenium.UCOpenSelenium.resources
+E:\c#\autoselenium\obj\Debug\AutoSelenium.UCSleep.resources
+E:\c#\autoselenium\obj\Debug\AutoSelenium.csprojResolveAssemblyReference.cache

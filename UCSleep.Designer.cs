@@ -60,6 +60,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "UCSleep";
             this.Size = new System.Drawing.Size(215, 26);
+            this.Load += new System.EventHandler(this.UCSleep_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
