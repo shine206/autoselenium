@@ -93,6 +93,12 @@
     <Compile Include="UCSleep.Designer.cs">
       <DependentUpon>UCSleep.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCWait.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCWait.Designer.cs">
+      <DependentUpon>UCWait.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCSleep.resx">
       <DependentUpon>UCSleep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCWait.resx">
+      <DependentUpon>UCWait.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

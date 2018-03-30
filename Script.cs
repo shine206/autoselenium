@@ -7,7 +7,7 @@ namespace AutoSelenium
 {
     class Script
     {
-        private string sleep;
+        private string time;
         private string action;
         private string by;
         private string element;
@@ -18,14 +18,14 @@ namespace AutoSelenium
         {
         }
 
-        public Script(string action, string url, string by, string element, string key, string sleep)
+        public Script(string action, string url, string by, string element, string key, string time)
         {
             this.action = action;
             this.url = url;
             this.by = by;
             this.element = element;
             this.key = key;
-            this.sleep = sleep;
+            this.time = time;
         }
 
         public string Action
@@ -93,16 +93,16 @@ namespace AutoSelenium
             }
         }
 
-        public string Sleep
+        public string Time
         {
             get
             {
-                return sleep;
+                return time;
             }
 
             set
             {
-                sleep = value;
+                time = value;
             }
         }
     }
