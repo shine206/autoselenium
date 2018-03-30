@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
+using System.IO;
 
 namespace AutoSelenium
 {
@@ -22,6 +23,7 @@ namespace AutoSelenium
         private UCSleep ucSleep = new UCSleep();
         private ActionScript actionScript = new ActionScript();
         private IWebDriver driver;
+        private string script;
         public Form1()
         {
             InitializeComponent();
@@ -87,20 +89,20 @@ namespace AutoSelenium
             if (action.ToLower().Contains("open selenium"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action, "", ucOpen.browser);
+                script = fn.ActionToString(action, "", ucOpen.browser);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
             }
             else if (action.ToLower().Contains("go to url"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action, ucURL.URL);
+                script = fn.ActionToString(action, ucURL.URL);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
                 ucURL.URL = "";
             }
             else if (action.ToLower().Contains("click"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action, "", ucClick.byElement, ucClick.element);
+                script = fn.ActionToString(action, "", ucClick.byElement, ucClick.element);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
                 ucClick.byElement = "";
                 ucClick.element = "";
@@ -108,7 +110,7 @@ namespace AutoSelenium
             else if (action.ToLower().Contains("send"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action, "", ucSend.byElement, ucSend.element, ucSend.key);
+                script = fn.ActionToString(action, "", ucSend.byElement, ucSend.element, ucSend.key);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
                 ucSend.byElement = "";
                 ucSend.element = "";
@@ -117,20 +119,20 @@ namespace AutoSelenium
             else if (action.ToLower().Contains("sleep"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action,"","","","",ucSleep.time.ToString());
+                script = fn.ActionToString(action, "", "", "", "", ucSleep.time.ToString());
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
                 ucSleep.time = "";
             }
             else if (action.ToLower().Contains("wait element"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action, ucClick.byElement, ucClick.element);
+                script = fn.ActionToString(action, ucClick.byElement, ucClick.element);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
             }
             else if (action.ToLower().Contains("close selenium"))
             {
                 int id = lvScript.Items.Count + 1;
-                string script = fn.ActionToString(action);
+                script = fn.ActionToString(action);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
             }
 
@@ -255,7 +257,7 @@ namespace AutoSelenium
                     ucClick.element = dic["element"];
                     break;
                 case "send":
-                     grbAction.Controls.Clear();
+                    grbAction.Controls.Clear();
                     ucSend.Left = 6;
                     ucSend.Top = 18;
                     grbAction.Height = ucSend.Height + 30;
@@ -278,80 +280,131 @@ namespace AutoSelenium
                     ucSleep.time = dic["sleep"];
                     break;
                 default:
-                    
-                    break;
-            }    
-        }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            for (int i = lvScript.SelectedIndices.Count - 1; i >= 0; i--)
-            {
-                lvScript.Items.RemoveAt(lvScript.SelectedIndices[i]);
+                    break;
             }
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+
             switch (cbbAction.Text.ToLower())
             {
                 case "open selenium":
-                    grbAction.Controls.Clear();
-                    ucOpen.Left = 6;
-                    ucOpen.Top = 18;
-                    grbAction.Height = ucOpen.Height + 30;
-                    grbAction.Controls.Add(ucOpen);
-                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = cbbAction.Text;
-                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = ucOpen.browser;
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[1].Text = cbbAction.Text;
+                    script = fn.ActionToString(cbbAction.Text, "", ucOpen.browser);
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[2].Text = script;
                     break;
                 case "go to url":
-                    grbAction.Controls.Clear();
-                    ucURL.Left = 6;
-                    ucURL.Top = 18;
-                    grbAction.Height = ucURL.Height + 30;
-                    grbAction.Controls.Add(ucURL);
-                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = cbbAction.Text;
-                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = ucURL.URL;
+
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[1].Text = cbbAction.Text;
+                    script = fn.ActionToString(cbbAction.Text, ucURL.URL);
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[2].Text = script;
                     break;
                 case "click":
-                    grbAction.Controls.Clear();
-                    ucClick.Left = 6;
-                    ucClick.Top = 18;
-                    grbAction.Height = ucClick.Height + 30;
-                    grbAction.Controls.Add(ucClick);
-                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = cbbAction.Text;
-                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = ucClick.byElement;
-                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = ucClick.element;
+
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[1].Text = cbbAction.Text;
+                    script = fn.ActionToString(cbbAction.Text, "", ucClick.byElement, ucClick.element);
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[2].Text = script;
                     break;
                 case "send":
-                     grbAction.Controls.Clear();
-                    ucSend.Left = 6;
-                    ucSend.Top = 18;
-                    grbAction.Height = ucSend.Height + 30;
-                    grbAction.Controls.Add(ucSend);
+
                     lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = cbbAction.Text;
-                    string by = ucSend.byElement;
-                    string element = ucSend.element;
-                    string key = ucSend.key;
+                    script = fn.ActionToString(cbbAction.Text, "", ucSend.byElement, ucSend.element, ucSend.key);
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[2].Text = script;
                     break;
                 case "wait element":
 
                     break;
                 case "sleep":
-                    grbAction.Controls.Clear();
-                    ucSleep.Left = 6;
-                    ucSleep.Top = 18;
-                    grbAction.Height = ucSleep.Height + 30;
-                    grbAction.Controls.Add(ucSleep);
+
                     lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[0].Text = cbbAction.Text;
-                    string time = ucSleep.time;
+                    script = fn.ActionToString(cbbAction.Text, "", "", "", "", ucSleep.time);
+                    lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[2].Text = script;
                     break;
                 default:
-                    
+
                     break;
-            }    
-           
+            }
+
+
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+            if (lvScript.SelectedIndices.Count > 0)
+            {
+                for (int i = lvScript.SelectedIndices.Count - 1; i >= 0; i--)
+                {
+                    lvScript.Items.RemoveAt(lvScript.SelectedIndices[i]);
+                }
+            }
+            else
+                MessageBox.Show("Bạn chưa chọn kịch bản muốn xóa.");
             
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc là muốn thoát không?", "AutoSelenium", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path,line;
+            OpenFileDialog theDialog = new OpenFileDialog();
+            theDialog.Title = "Open Text File";
+            theDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            theDialog.InitialDirectory = @"C:\";
+            if (theDialog.ShowDialog() == DialogResult.OK)
+            {
+                path = theDialog.FileName.ToString();
+                StreamReader file = new StreamReader(path);
+                while ((line = file.ReadLine()) != null)
+                {
+                    string[] kq = line.Split('&');
+                    ListViewItem lvi = new ListViewItem(kq[0]);
+                    lvi.SubItems.Add(kq[1]);
+                    lvi.SubItems.Add(kq[2]);
+                    lvScript.Items.Add(lvi);
+                }
+                file.Dispose();
+            }
+            theDialog.Dispose();
+            
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter myStream = new StreamWriter(saveFileDialog1.FileName);
+                for (int i = 0; i < lvScript.Items.Count; i++)
+                {
+                    string id = lvScript.Items[i].SubItems[0].Text;
+                    string action = lvScript.Items[i].SubItems[1].Text;
+                    string script = lvScript.Items[i].SubItems[2].Text;
+                    myStream.WriteLine(id+"&"+action+"&"+script);
+
+                }
+                myStream.Close();
+            }
+           saveFileDialog1.Dispose();
         }
     }
 }
