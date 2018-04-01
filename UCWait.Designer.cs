@@ -38,10 +38,10 @@
             // 
             // txtTime
             // 
-            this.txtTime.Location = new System.Drawing.Point(60, 82);
+            this.txtTime.Location = new System.Drawing.Point(77, 82);
             this.txtTime.Margin = new System.Windows.Forms.Padding(4);
             this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(142, 23);
+            this.txtTime.Size = new System.Drawing.Size(125, 23);
             this.txtTime.TabIndex = 18;
             // 
             // label3
@@ -50,9 +50,9 @@
             this.label3.Location = new System.Drawing.Point(-3, 86);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 17);
+            this.label3.Size = new System.Drawing.Size(78, 17);
             this.label3.TabIndex = 17;
-            this.label3.Text = "Time: ";
+            this.label3.Text = "Time Out : ";
             // 
             // cbbBy
             // 

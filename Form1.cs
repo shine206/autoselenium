@@ -10,17 +10,21 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System.IO;
+using OpenQA.Selenium.Support.UI;
+using System.Threading;
 
 namespace AutoSelenium
 {
     public partial class Form1 : Form
     {
+        private string PATH_APP = System.IO.Directory.GetCurrentDirectory() + @"\Scripts\";
         private UCOpenSelenium ucOpen = new UCOpenSelenium();
         private UCGotoURL ucURL = new UCGotoURL();
         private UCClick ucClick = new UCClick();
         private UCSend ucSend = new UCSend();
         private UCSleep ucSleep = new UCSleep();
         private UCWait ucWait = new UCWait();
+        private UCRunJavascript ucRunJs = new UCRunJavascript();
         private Function fn = new Function();
         private ActionScript actionScript = new ActionScript();
         private IWebDriver driver;
@@ -32,7 +36,7 @@ namespace AutoSelenium
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Console.WriteLine(PATH_APP);
             cbbAction.SelectedIndex = 0;
         }
 
@@ -85,6 +89,14 @@ namespace AutoSelenium
                 case 6:
                     grbAction.Controls.Clear();
                     break;
+                case 7:
+                    grbAction.Controls.Clear();
+                    ucRunJs.Left = 6;
+                    ucRunJs.Top = 18;
+                    grbAction.Height = ucRunJs.Height + 30;
+                    grbAction.Controls.Add(ucRunJs);
+                    break;
+
                 default:
                     MessageBox.Show("Chưa có user control");
                     break;
@@ -98,8 +110,13 @@ namespace AutoSelenium
 
         private void btnRunScript_Click(object sender, EventArgs e)
         {
-            actionScript.dataScript(lvScript);
-            actionScript.runScript();
+
+            if (actionScript.dataScript(lvScript).Length > 0)
+            {
+                actionScript.runScript();
+            }
+            else
+                MessageBox.Show("Chưa có kịch bản để chạy.");
 
         }
 
@@ -217,6 +234,15 @@ namespace AutoSelenium
                 script = fn.ActionToString(action);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
             }
+            else if (action.ToLower().Contains("run javascript"))
+            {
+                string fileName = "Script" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".txt";
+                File.WriteAllText(PATH_APP + fileName, ucRunJs.CodeJs);
+                int id = lvScript.Items.Count + 1;
+                script = fn.ActionToString(action, "", "", "", PATH_APP + fileName);
+                lvScript.Items.Add(fn.AddScipt(id, cbbAction.Text, script));
+
+            }
         }
 
         private void updateScript()
@@ -254,9 +280,16 @@ namespace AutoSelenium
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
                         break;
                     case "sleep":
-                        lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[1].Text = cbbAction.Text;
+                        lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
                         script = fn.ActionToString(cbbAction.Text, "", "", "", "", ucSleep.time);
-                        lvScript.Items[lvScript.SelectedIndices.ToString()].SubItems[2].Text = script;
+                        lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        break;
+                    case "run javascript":
+                        string fileName = "Script" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".txt";
+                        File.WriteAllText(PATH_APP + fileName, ucRunJs.CodeJs);
+                        lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
+                        script = fn.ActionToString(cbbAction.Text, "", "", "", PATH_APP + fileName);
+                        lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
                         break;
                     default:
 
@@ -272,19 +305,17 @@ namespace AutoSelenium
             {
                 MessageBox.Show("Sửa thành công.");
             }
-            
+
         }
 
         //Test
         private void testScript()
         {
-            if (lvScript.Items.Count > 0)
+            switch (cbbAction.Text.ToLower())
             {
-                actionScript.dataScript(lvScript);
-                actionScript.runScript();
-                switch (cbbAction.Text.ToLower())
-                {
-                    case "open selenium":
+                case "open selenium":
+                    try
+                    {
                         if (cbbAction.Text.Contains("FireFox"))
                         {
                             driver = new FirefoxDriver();
@@ -293,63 +324,112 @@ namespace AutoSelenium
                         {
                             driver = new ChromeDriver();
                         }
-                        break;
-                    case "go to url":
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Lỗi!!!!" + e);
+                        throw;
+                    }
+                    break;
+                case "go to url":
 
+                    if (Uri.IsWellFormedUriString(ucURL.URL, UriKind.RelativeOrAbsolute))
                         driver.Url = ucURL.URL;
-                        break;
-                    case "click":
+                    else
+                        MessageBox.Show("Url sai.");
+                    break;
+                case "click":
+                    try
+                    {
                         if (ucClick.byElement.Contains("Xpath"))
-                            if (driver.FindElement(By.XPath("" + ucClick.element)) != null)
-                                MessageBox.Show("Success!");
-                            else
-                                MessageBox.Show("Fail!");
-                        //driver.FindElement(By.XPath(""+ucClick.element)).Click();
+                            driver.FindElement(By.XPath("" + ucClick.element)).Click();
                         else if (ucClick.byElement.Contains("Class"))
-                            if (driver.FindElement(By.ClassName(ucClick.element)) != null)
-                                MessageBox.Show("Success!");
-                            else
-                                MessageBox.Show("Fail!");
-                        //driver.FindElement(By.ClassName(ucClick.element)).Click();
+                            driver.FindElement(By.ClassName(ucClick.element)).Click();
                         else
-                            if (driver.FindElement(By.Id(ucClick.element)) != null)
-                                MessageBox.Show("Success!");
-                            else
-                                MessageBox.Show("Fail!");
-                        //driver.FindElement(By.Id(ucClick.element)).Click();
-                        break;
-                    case "send":
-                        if (ucSend.byElement.Contains("Xpath"))
-                            if (driver.FindElement(By.XPath(ucSend.element)) != null)
-                                MessageBox.Show("Success!");
-                            else
-                                MessageBox.Show("Fail!");
-                        //driver.FindElement(By.XPath(ucSend.element)).SendKeys(ucSend.key);
-                        else if (ucSend.byElement.Contains("Class"))
-                            if (driver.FindElement(By.ClassName(ucSend.element)) != null)
-                                MessageBox.Show("Success!");
-                            else
-                                MessageBox.Show("Fail!");
-                        //driver.FindElement(By.ClassName(ucSend.element)).SendKeys(ucSend.key);
-                        else
-                            if (driver.FindElement(By.Id(ucSend.element)) != null)
-                                MessageBox.Show("Success!");
-                            else
-                                MessageBox.Show("Fail!");
-                        //driver.FindElement(By.Id(ucSend.element)).SendKeys(ucSend.key);
-                        break;
-                    case "wait element":
+                            driver.FindElement(By.Id(ucClick.element)).Click();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Element sai!!!!");
+                    }
 
-                        break;
-                    default:
-                        if (driver != null)
-                        {
-                            driver.Close();
-                        }
-                        break;
-                }
+                    break;
+                case "send":
+                    try
+                    {
+                        if (ucSend.byElement.Contains("Xpath"))
+                            driver.FindElement(By.XPath(ucSend.element)).SendKeys(ucSend.key);
+                        else if (ucSend.byElement.Contains("Class"))
+                            driver.FindElement(By.ClassName(ucSend.element)).SendKeys(ucSend.key);
+                        else
+                            driver.FindElement(By.Id(ucSend.element)).SendKeys(ucSend.key);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Element sai!!!!");
+                    }
+                    break;
+                case "wait element":
+                    try
+                    {
+                        if (ucWait.byElement.Contains("Xpath"))
+                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.XPath(ucWait.element)));
+                        else if (ucWait.byElement.Contains("Class"))
+
+                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.ClassName(ucWait.element)));
+                        else
+                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.Id(ucWait.element)));
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Element sai!!!!" + e);
+                        throw;
+                    }
+
+                    break;
+                case "sleep":
+                    try
+                    {
+                        Thread.Sleep(int.Parse(ucSleep.time));
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Het time!!!!" + e);
+                        throw;
+                    }
+                    break;
+                case "run javascript":
+                    try
+                    {
+                        IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                        js.ExecuteScript(ucRunJs.CodeJs);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Lỗi!!!!" + e);
+                        throw;
+                    }
+
+                    break;
+                case "close selenium":
+                    try
+                    {
+                        driver.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Lỗi!!!!" + e);
+                        throw;
+                    }
+
+                    break;
+                default:
+
+                    break;
             }
+
         }
+
         private void editListView(ListViewItemSelectionChangedEventArgs e)
         {
             var item = e.Item;

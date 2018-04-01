@@ -8,6 +8,8 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.IO;
+using System.Threading;
 
 namespace AutoSelenium
 {
@@ -33,7 +35,7 @@ namespace AutoSelenium
             };
         }
 
-        public void dataScript(ListView lvScript) {
+        public Array dataScript(ListView lvScript) {
             List<Script> listscript = new List<Script>();
             for (int i = 0; i < lvScript.Items.Count; i++)
             {
@@ -50,6 +52,7 @@ namespace AutoSelenium
                 listscript.Add(row);
             }
             getdataScript = listscript.ToArray();
+            return getdataScript;
         }
 
         public void runScript()
@@ -59,45 +62,120 @@ namespace AutoSelenium
                 switch (getdataScript[i].Action)
                 {
                     case "open selenium":
-                        if (getdataScript[i].By.Contains("FireFox"))
+                        try
                         {
-                            driver = new FirefoxDriver();   
+                            if (getdataScript[i].By.Contains("FireFox"))
+                            {
+                                driver = new FirefoxDriver();
+                            }
+                            else
+                            {
+                                driver = new ChromeDriver();
+                            }
                         }
-                        else
+                        catch (Exception e)
                         {
-                            driver = new ChromeDriver();
+                            MessageBox.Show("Lỗi!!!!"+e);
+                            throw;
                         }
                         break;
                     case "go to url":
-                        driver.Url = getdataScript[i].Url;
+
+                        if (Uri.IsWellFormedUriString(getdataScript[i].Url, UriKind.RelativeOrAbsolute))
+                            driver.Url = getdataScript[i].Url;
+                        else
+                            MessageBox.Show("Url sai.");
                         break;
                     case "click":
-                        if (getdataScript[i].By.Contains("Xpath"))
-                            driver.FindElement(By.XPath(""+getdataScript[i].Element)).Click();
-                        else if (getdataScript[i].By.Contains("Class"))
-                            driver.FindElement(By.ClassName(getdataScript[i].Element)).Click();
-                        else
-                            driver.FindElement(By.Id(getdataScript[i].Element)).Click();
+                        try
+                        {
+                            if (getdataScript[i].By.Contains("Xpath"))
+                                driver.FindElement(By.XPath("" + getdataScript[i].Element)).Click();
+                            else if (getdataScript[i].By.Contains("Class"))
+                                driver.FindElement(By.ClassName(getdataScript[i].Element)).Click();
+                            else
+                                driver.FindElement(By.Id(getdataScript[i].Element)).Click();
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Element sai!!!!");
+                        }
+                        
                         break;
                     case "send":
-                        if (getdataScript[i].By.Contains("Xpath"))
-                            driver.FindElement(By.XPath(getdataScript[i].Element)).SendKeys(getdataScript[i].Key);
-                        else if (getdataScript[i].By.Contains("Class"))
-                            driver.FindElement(By.ClassName(getdataScript[i].Element)).SendKeys(getdataScript[i].Key);
-                        else
-                            driver.FindElement(By.Id(getdataScript[i].Element)).SendKeys(getdataScript[i].Key);
+                        try
+                        {
+                            if (getdataScript[i].By.Contains("Xpath"))
+                                driver.FindElement(By.XPath(getdataScript[i].Element)).SendKeys(getdataScript[i].Key);
+                            else if (getdataScript[i].By.Contains("Class"))
+                                driver.FindElement(By.ClassName(getdataScript[i].Element)).SendKeys(getdataScript[i].Key);
+                            else
+                                driver.FindElement(By.Id(getdataScript[i].Element)).SendKeys(getdataScript[i].Key);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Element sai!!!!");
+                        }
                         break;
                     case "wait element":
-                        if (getdataScript[i].By.Contains("Xpath"))
-                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(getdataScript[i].Time))).Until(ExpectedConditions.ElementExists(By.XPath(getdataScript[i].Element)));
-                        else if (getdataScript[i].By.Contains("Class"))
+                        try
+                        {
+                            if (getdataScript[i].By.Contains("Xpath"))
+                                new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(getdataScript[i].Time))).Until(ExpectedConditions.ElementExists(By.XPath(getdataScript[i].Element)));
+                            else if (getdataScript[i].By.Contains("Class"))
 
-                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(getdataScript[i].Time))).Until(ExpectedConditions.ElementExists(By.ClassName(getdataScript[i].Element)));
-                        else
-                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(getdataScript[i].Time))).Until(ExpectedConditions.ElementExists(By.Id(getdataScript[i].Element)));
+                                new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(getdataScript[i].Time))).Until(ExpectedConditions.ElementExists(By.ClassName(getdataScript[i].Element)));
+                            else
+                                new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(getdataScript[i].Time))).Until(ExpectedConditions.ElementExists(By.Id(getdataScript[i].Element)));
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Element sai!!!!" + e);
+                            throw;
+                        }
+                        
+                        break;
+                    case "sleep":
+                        try
+                        {
+                            Thread.Sleep(int.Parse(getdataScript[i].Time));
+                            driver.Quit();
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Het time!!!!" + e);
+                            throw;
+                        }
+                        break;
+                    case "run javascript":
+                        try
+                        {
+                            string codeJS = File.ReadAllText(getdataScript[i].Key);
+                            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+                            js.ExecuteScript(codeJS);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Lỗi!!!!" + e);
+                            throw;
+                        }
+                        
+                        break;
+                    case"close selenium":
+                        try
+                        {
+                            driver.Dispose();
+
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Lỗi!!!!" + e);
+                            throw;
+                        }
+                        
                         break;
                     default:
-                        driver.Dispose();
+                        
                         break;
                 }    
             }

@@ -81,6 +81,12 @@
     <Compile Include="UCOpenSelenium.Designer.cs">
       <DependentUpon>UCOpenSelenium.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCRunJavascript.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCRunJavascript.Designer.cs">
+      <DependentUpon>UCRunJavascript.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCSend.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCOpenSelenium.resx">
       <DependentUpon>UCOpenSelenium.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCRunJavascript.resx">
+      <DependentUpon>UCRunJavascript.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCSend.resx">
       <DependentUpon>UCSend.cs</DependentUpon>

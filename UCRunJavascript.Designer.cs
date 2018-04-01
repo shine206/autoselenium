@@ -1,6 +1,6 @@
 ﻿namespace AutoSelenium
 {
-    partial class UCSleep
+    partial class UCRunJavascript
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,39 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtTime = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.rtxtCode = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // txtTime
-            // 
-            this.txtTime.Location = new System.Drawing.Point(75, 0);
-            this.txtTime.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(133, 23);
-            this.txtTime.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(-3, 4);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(-2, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 17);
+            this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Time Out:";
+            this.label1.Text = "Code JS:";
             // 
-            // UCSleep
+            // rtxtCode
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.rtxtCode.Location = new System.Drawing.Point(0, 24);
+            this.rtxtCode.Name = "rtxtCode";
+            this.rtxtCode.Size = new System.Drawing.Size(215, 110);
+            this.rtxtCode.TabIndex = 4;
+            this.rtxtCode.Text = "";
+            // 
+            // UCRunJavascript
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.txtTime);
+            this.Controls.Add(this.rtxtCode);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4);
-            this.Name = "UCSleep";
-            this.Size = new System.Drawing.Size(215, 26);
-            this.Load += new System.EventHandler(this.UCSleep_Load);
+            this.Name = "UCRunJavascript";
+            this.Size = new System.Drawing.Size(215, 137);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,7 +64,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtTime;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RichTextBox rtxtCode;
     }
 }

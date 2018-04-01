@@ -9,6 +9,7 @@ namespace AutoSelenium
 {
     class Function
     {
+        private string PATH_APP = System.IO.Directory.GetCurrentDirectory() + @"\Scripts\";
         public string ActionToString(string action = "click", string url = "", string by = "", string element = "", string key = "", string time = "")
         {
             return string.Format("Action={0}|URL={1}|By={2}|Element={3}|Key={4}|Time={5}|", action.ToLower(), url, by, element, key, time);
@@ -26,7 +27,7 @@ namespace AutoSelenium
             OpenFileDialog theDialog = new OpenFileDialog();
             theDialog.Title = "Open Text File";
             theDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            theDialog.InitialDirectory = @"C:\";
+            theDialog.InitialDirectory = @"PATH_APP";
             if (theDialog.ShowDialog() == DialogResult.OK)
             {
                 path = theDialog.FileName.ToString();
