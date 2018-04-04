@@ -1,0 +1,2 @@
+1&Open Selenium&Action=open selenium|URL=|By=Chrome|Element=|Key=|Time=|Proxy=147.135.210.114|Port=54566|
+2&Go to URL&Action=go to url|URL=https://whoer.net/|By=|Element=|Key=|Time=|Proxy=|Port=|

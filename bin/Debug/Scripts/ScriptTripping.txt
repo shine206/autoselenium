@@ -1,11 +1,12 @@
-1&Open Selenium&Action=open selenium|URL=|By=Chrome|Element=|Key=|Time=|
-2&Go to URL&Action=go to url|URL=https://www.tripping.com|By=|Element=|Key=|Time=|
-3&Send&Action=send|URL=|By=Xpath|Element=//input[@name="query"]|Key=Hồ Chí Minh|Time=|
-4&Wait Element&Action=wait element|URL=|By=Class|Element=pac-item|Key=|Time=60|
-5&Click&Action=click|URL=|By=Class|Element=pac-item|Key=|Time=|
-6&Click&Action=click|URL=|By=Xpath|Element=//*[contains(text() , 'Select dates')]|Key=|Time=|
-7&Click&Action=click|URL=|By=Xpath|Element=//td[contains(text() , '5')]|Key=|Time=|
-8&Click&Action=click|URL=|By=Xpath|Element=//td[contains(text() , '31')]|Key=|Time=|
-9&Click&Action=click|URL=|By=Xpath|Element=//span[contains(text() , 'Guests')]|Key=|Time=|
-11&Click&Action=click|URL=|By=Xpath|Element=//li/span/span[contains(text() , '5')]|Key=|Time=|
-11&Click&Action=click|URL=|By=ID|Element=sc-search-button|Key=|Time=|
+1&Open Selenium&Action=open selenium|URL=|By=Chrome|Element=|Key=|Time=|Proxy=|Port=|
+2&Go to URL&Action=go to url|URL=https://www.tripping.com|By=|Element=|Key=|Time=|Proxy=|Port=|
+3&Send&Action=send|URL=|By=Xpath|Element=//input[@name="query"]|Key=Hồ Chí Minh|Time=|Proxy=|Port=|
+4&Wait Element&Action=wait element|URL=|By=Class|Element=pac-item|Key=|Time=60|Proxy=|Port=|
+5&Click&Action=click|URL=|By=Class|Element=pac-item|Key=|Time=|Proxy=|Port=|
+6&Click&Action=click|URL=|By=Xpath|Element=//*[contains(text() , 'Select dates')]|Key=|Time=|Proxy=|Port=|
+7&Click&Action=click|URL=|By=Xpath|Element=//td[contains(text() , '5')]|Key=|Time=|Proxy=|Port=|
+8&Click&Action=click|URL=|By=Xpath|Element=//td[contains(text() , '31')]|Key=|Time=|Proxy=|Port=|
+9&Click&Action=click|URL=|By=Xpath|Element=//span[contains(text() , 'Guests')]|Key=|Time=|Proxy=|Port=|
+11&Click&Action=click|URL=|By=Xpath|Element=//li/span/span[contains(text() , '4')]|Key=|Time=|Proxy=|Port=|
+11&Click&Action=click|URL=|By=ID|Element=sc-search-button|Key=|Time=|Proxy=|Port=|
+12&Close Selenium&Action=close selenium|URL=|By=|Element=|Key=|Time=|Proxy=|Port=|

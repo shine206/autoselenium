@@ -36,8 +36,9 @@ namespace AutoSelenium
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Console.WriteLine(PATH_APP);
             cbbAction.SelectedIndex = 0;
+            btnDelete.Enabled = false;
+            btnUpdate.Enabled = false;
         }
 
         private void cbbAction_SelectedIndexChanged(object sender, EventArgs e)
@@ -125,11 +126,6 @@ namespace AutoSelenium
             testScript();
         }
 
-        private void lvScript_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-            editListView(e);
-        }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             updateScript();
@@ -144,6 +140,9 @@ namespace AutoSelenium
                     lvScript.Items.RemoveAt(lvScript.SelectedIndices[i]);
                 }
                 MessageBox.Show("Xóa thành công.");
+                btnAddToSrcipt.Enabled = true;
+                btnDelete.Enabled = false;
+                btnUpdate.Enabled = false;
             }
             else
                 MessageBox.Show("Bạn chưa chọn kịch bản muốn xóa.");
@@ -188,45 +187,44 @@ namespace AutoSelenium
             if (action.ToLower().Contains("open selenium"))
             {
                 int id = lvScript.Items.Count + 1;
-                script = fn.ActionToString(action, "", ucOpen.browser);
+                script = fn.ActionToString(action, "", ucOpen.browser, "", "", "", ucOpen.proxy, ucOpen.port);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
+                resetControl();
             }
             else if (action.ToLower().Contains("go to url"))
             {
                 int id = lvScript.Items.Count + 1;
                 script = fn.ActionToString(action, ucURL.URL);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
-                ucURL.URL = "";
+                resetControl();
             }
             else if (action.ToLower().Contains("click"))
             {
                 int id = lvScript.Items.Count + 1;
                 script = fn.ActionToString(action, "", ucClick.byElement, ucClick.element);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
-                ucClick.byElement = "";
-                ucClick.element = "";
+                resetControl();
             }
             else if (action.ToLower().Contains("send"))
             {
                 int id = lvScript.Items.Count + 1;
                 script = fn.ActionToString(action, "", ucSend.byElement, ucSend.element, ucSend.key);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
-                ucSend.byElement = "";
-                ucSend.element = "";
-                ucSend.key = "";
+                resetControl();
             }
             else if (action.ToLower().Contains("sleep"))
             {
                 int id = lvScript.Items.Count + 1;
                 script = fn.ActionToString(action, "", "", "", "", ucSleep.time.ToString());
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
-                ucSleep.time = "";
+                resetControl();
             }
             else if (action.ToLower().Contains("wait element"))
             {
                 int id = lvScript.Items.Count + 1;
                 script = fn.ActionToString(action, "", ucWait.byElement, ucWait.element, "", ucWait.time);
                 lvScript.Items.Add(fn.AddScipt(id, action, script));
+                resetControl();
             }
             else if (action.ToLower().Contains("close selenium"))
             {
@@ -241,6 +239,7 @@ namespace AutoSelenium
                 int id = lvScript.Items.Count + 1;
                 script = fn.ActionToString(action, "", "", "", PATH_APP + fileName);
                 lvScript.Items.Add(fn.AddScipt(id, cbbAction.Text, script));
+                resetControl();
 
             }
         }
@@ -253,36 +252,40 @@ namespace AutoSelenium
                 {
                     case "open selenium":
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
-                        script = fn.ActionToString(cbbAction.Text, "", ucOpen.browser);
+                        script = fn.ActionToString(cbbAction.Text, "", ucOpen.browser, "", "", "", ucOpen.proxy, ucOpen.port);
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        resetControl();
                         break;
                     case "go to url":
-
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
                         script = fn.ActionToString(cbbAction.Text, ucURL.URL);
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        resetControl();
                         break;
                     case "click":
-
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
                         script = fn.ActionToString(cbbAction.Text, "", ucClick.byElement, ucClick.element);
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        resetControl();
                         break;
                     case "send":
 
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
                         script = fn.ActionToString(cbbAction.Text, "", ucSend.byElement, ucSend.element, ucSend.key);
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        resetControl();
                         break;
                     case "wait element":
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
                         script = fn.ActionToString(cbbAction.Text, "", ucWait.byElement, ucWait.element, "", ucWait.time);
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        resetControl();
                         break;
                     case "sleep":
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
                         script = fn.ActionToString(cbbAction.Text, "", "", "", "", ucSleep.time);
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        resetControl();
                         break;
                     case "run javascript":
                         string fileName = "Script" + DateTime.Now.ToString("yyyyMMddHHmmssffff") + ".txt";
@@ -290,20 +293,17 @@ namespace AutoSelenium
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[1].Text = cbbAction.Text;
                         script = fn.ActionToString(cbbAction.Text, "", "", "", PATH_APP + fileName);
                         lvScript.Items[lvScript.SelectedIndices[0]].SubItems[2].Text = script;
+                        resetControl();
                         break;
                     default:
 
                         break;
                 }
+                MessageBox.Show("Sửa thành công.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Sửa thất bại." + ex);
-                throw;
-            }
-            finally
-            {
-                MessageBox.Show("Sửa thành công.");
+                MessageBox.Show("Sửa thất bại.");
             }
 
         }
@@ -315,28 +315,74 @@ namespace AutoSelenium
             {
                 case "open selenium":
                     try
-                    {
-                        if (cbbAction.Text.Contains("FireFox"))
                         {
-                            driver = new FirefoxDriver();
+                            if (ucOpen.browser.Contains("FireFox"))
+                            {
+                                if (ucOpen.proxy == "" | ucOpen.port == "")
+                                {
+                                    driver = new FirefoxDriver();
+
+                                }
+                                else
+                                {
+
+                                    FirefoxProfile firefoxProfile = new FirefoxProfile();
+                                    firefoxProfile.SetPreference("network.proxy.type", 1);
+                                    // điền vào IP của proxy
+                                    firefoxProfile.SetPreference("network.proxy.http", ucOpen.proxy);
+                                    // điền vào port
+                                    firefoxProfile.SetPreference("network.proxy.http_port", int.Parse(ucOpen.port));
+                                    firefoxProfile.SetPreference("network.proxy.ssl", ucOpen.proxy);
+                                    firefoxProfile.SetPreference("network.proxy.ssl_port", int.Parse(ucOpen.port));
+
+                                    // khởi tạo WebDriver
+                                    driver = new FirefoxDriver(firefoxProfile);
+                                }
+                            }
+                            else
+                            {
+                                if (ucOpen.proxy == "" | ucOpen.port == "")
+                                {
+                                    driver = new ChromeDriver();
+                                    Console.WriteLine("sssss");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Dang dooi proxy");
+                                    ChromeOptions options = new ChromeOptions();
+                                    var proxy = new Proxy();
+                                    proxy.Kind = ProxyKind.Manual;
+                                    proxy.IsAutoDetect = false;
+                                    proxy.HttpProxy = proxy.SslProxy = ucOpen.proxy + ":" + ucOpen.port;
+                                    options.Proxy = proxy;
+                                    options.AddArgument("ignore-certificate-errors");
+                                    var chromedriver = new ChromeDriver(options);
+                                }
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show("Lỗi! Không mở được selenium!!!");
+                        }
+                        break;
+                case "go to url":
+                        if (ucURL.URL != null)
+                        {
+                            if (Uri.IsWellFormedUriString(ucURL.URL, UriKind.RelativeOrAbsolute))
+                                try
+                                {
+                                    driver.Url = ucURL.URL;
+
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("Lỗi proxy!!!");
+                                }
+                            else
+                                MessageBox.Show("Url sai.");
                         }
                         else
-                        {
-                            driver = new ChromeDriver();
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show("Lỗi!!!!" + e);
-                        throw;
-                    }
-                    break;
-                case "go to url":
-
-                    if (Uri.IsWellFormedUriString(ucURL.URL, UriKind.RelativeOrAbsolute))
-                        driver.Url = ucURL.URL;
-                    else
-                        MessageBox.Show("Url sai.");
+                            MessageBox.Show("Bạn chưa nhập URL");
                     break;
                 case "click":
                     try
@@ -373,17 +419,17 @@ namespace AutoSelenium
                     try
                     {
                         if (ucWait.byElement.Contains("Xpath"))
-                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.XPath(ucWait.element)));
+                            new WebDriverWait(driver, TimeSpan.FromSeconds(double.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.XPath(ucWait.element)));
                         else if (ucWait.byElement.Contains("Class"))
 
-                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.ClassName(ucWait.element)));
+                            new WebDriverWait(driver, TimeSpan.FromSeconds(double.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.ClassName(ucWait.element)));
                         else
-                            new WebDriverWait(driver, TimeSpan.FromSeconds(int.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.Id(ucWait.element)));
+                            new WebDriverWait(driver, TimeSpan.FromSeconds(double.Parse(ucWait.time))).Until(ExpectedConditions.ElementExists(By.Id(ucWait.element)));
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Element sai!!!!" + e);
-                        throw;
+                        MessageBox.Show("Element sai!!!!");
+                        
                     }
 
                     break;
@@ -394,8 +440,8 @@ namespace AutoSelenium
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Het time!!!!" + e);
-                        throw;
+                        MessageBox.Show("Het time!!!!");
+                        
                     }
                     break;
                 case "run javascript":
@@ -406,8 +452,8 @@ namespace AutoSelenium
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Lỗi!!!!" + e);
-                        throw;
+                        MessageBox.Show("Lỗi!!!!");
+                        
                     }
 
                     break;
@@ -418,8 +464,8 @@ namespace AutoSelenium
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("Lỗi!!!!" + e);
-                        throw;
+                        MessageBox.Show("Lỗi!!!!");
+                        
                     }
 
                     break;
@@ -430,9 +476,13 @@ namespace AutoSelenium
 
         }
 
-        private void editListView(ListViewItemSelectionChangedEventArgs e)
+        private void lvScript_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var item = e.Item;
+            btnAddToSrcipt.Enabled = false;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            ListViewHitTestInfo info = lvScript.HitTest(e.X, e.Y);
+            ListViewItem item = info.Item;
             Dictionary<string, string> dic = actionScript.filterScript(item.SubItems[2].Text);
             switch (dic["action"])
             {
@@ -443,6 +493,8 @@ namespace AutoSelenium
                     grbAction.Height = ucOpen.Height + 30;
                     grbAction.Controls.Add(ucOpen);
                     cbbAction.Text = dic["action"];
+                    ucOpen.proxy = dic["proxy"];
+                    ucOpen.port = dic["port"];
                     ucOpen.browser = dic["by"];
                     break;
                 case "go to url":
@@ -499,6 +551,31 @@ namespace AutoSelenium
 
                     break;
             }
+        }
+
+        //Reset data các control
+        public void resetControl()
+        {
+            btnUpdate.Enabled = false;
+            btnDelete.Enabled = false;
+            btnAddToSrcipt.Enabled = true;
+            ucOpen.proxy = "";
+            ucOpen.port = "";
+            ucURL.URL = "";
+            ucClick.byElement = "";
+            ucClick.element = "";
+            ucSend.byElement = "";
+            ucSend.element = "";
+            ucSend.key = "";
+            ucSleep.time = "";
+            ucWait.time = "";
+            ucWait.element = "";
+            ucRunJs.CodeJs = "";
+        }
+
+        private void btnRefresh_Click_1(object sender, EventArgs e)
+        {
+            resetControl();
         }
     }
 }

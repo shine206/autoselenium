@@ -10,9 +10,9 @@ namespace AutoSelenium
     class Function
     {
         private string PATH_APP = System.IO.Directory.GetCurrentDirectory() + @"\Scripts\";
-        public string ActionToString(string action = "click", string url = "", string by = "", string element = "", string key = "", string time = "")
+        public string ActionToString(string action = "click", string url = "", string by = "", string element = "", string key = "", string time = "", string proxy ="", string port ="")
         {
-            return string.Format("Action={0}|URL={1}|By={2}|Element={3}|Key={4}|Time={5}|", action.ToLower(), url, by, element, key, time);
+            return string.Format("Action={0}|URL={1}|By={2}|Element={3}|Key={4}|Time={5}|Proxy={6}|Port={7}|", action.ToLower(), url, by, element, key, time, proxy, port);
         }
 
         public ListViewItem AddScipt(int id = 1, string action = "", string script = "")
@@ -23,6 +23,7 @@ namespace AutoSelenium
         }
         public void openFile(ListView lvScript)
         {
+            lvScript.Items.Clear();
             string path, line;
             OpenFileDialog theDialog = new OpenFileDialog();
             theDialog.Title = "Open Text File";
@@ -67,5 +68,6 @@ namespace AutoSelenium
             }
             saveFileDialog1.Dispose();
         }
+        
     }
 }

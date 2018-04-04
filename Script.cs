@@ -13,12 +13,14 @@ namespace AutoSelenium
         private string element;
         private string key;
         private string url;
+        private string proxy;
+        private string port;
 
         public Script()
         {
         }
 
-        public Script(string action, string url, string by, string element, string key, string time)
+        public Script(string action, string url, string by, string element, string key, string time, string proxy, string port)
         {
             this.action = action;
             this.url = url;
@@ -26,6 +28,9 @@ namespace AutoSelenium
             this.element = element;
             this.key = key;
             this.time = time;
+            this.proxy = proxy;
+            this.port = port;
+
         }
 
         public string Action
@@ -103,6 +108,32 @@ namespace AutoSelenium
             set
             {
                 time = value;
+            }
+        }
+
+        public string Proxy
+        {
+            get
+            {
+                return proxy;
+            }
+
+            set
+            {
+                proxy = value;
+            }
+        }
+
+        public string Port
+        {
+            get
+            {
+                return port;
+            }
+
+            set
+            {
+                port = value;
             }
         }
     }

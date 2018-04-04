@@ -36,6 +36,7 @@
             this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnTestScript = new System.Windows.Forms.Button();
@@ -115,6 +116,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnUpdate);
             this.panel1.Controls.Add(this.btnTestScript);
@@ -128,31 +130,50 @@
             this.panel1.Size = new System.Drawing.Size(240, 513);
             this.panel1.TabIndex = 1;
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::AutoSelenium.Properties.Resources.if_icon_refresh_211882;
+            this.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRefresh.Location = new System.Drawing.Point(9, 331);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(66, 53);
+            this.btnRefresh.TabIndex = 9;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click_1);
+            // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(68, 379);
+            this.btnDelete.Image = global::AutoSelenium.Properties.Resources.if_6___Cross_1815573;
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDelete.Location = new System.Drawing.Point(86, 331);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(95, 45);
+            this.btnDelete.Size = new System.Drawing.Size(66, 53);
             this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Delete script";
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(123, 311);
+            this.btnUpdate.Image = global::AutoSelenium.Properties.Resources.if_icon_136_document_edit_314251;
+            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnUpdate.Location = new System.Drawing.Point(163, 331);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(100, 45);
+            this.btnUpdate.Size = new System.Drawing.Size(66, 53);
             this.btnUpdate.TabIndex = 7;
-            this.btnUpdate.Text = "Update script";
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnTestScript
             // 
-            this.btnTestScript.Location = new System.Drawing.Point(26, 458);
+            this.btnTestScript.Location = new System.Drawing.Point(26, 448);
             this.btnTestScript.Name = "btnTestScript";
-            this.btnTestScript.Size = new System.Drawing.Size(86, 45);
+            this.btnTestScript.Size = new System.Drawing.Size(86, 55);
             this.btnTestScript.TabIndex = 6;
             this.btnTestScript.Text = "Test script";
             this.btnTestScript.UseVisualStyleBackColor = true;
@@ -160,11 +181,14 @@
             // 
             // btnRunScript
             // 
-            this.btnRunScript.Location = new System.Drawing.Point(130, 458);
+            this.btnRunScript.Image = global::AutoSelenium.Properties.Resources.if_Play_27865;
+            this.btnRunScript.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnRunScript.Location = new System.Drawing.Point(130, 448);
             this.btnRunScript.Name = "btnRunScript";
-            this.btnRunScript.Size = new System.Drawing.Size(86, 45);
+            this.btnRunScript.Size = new System.Drawing.Size(86, 55);
             this.btnRunScript.TabIndex = 5;
             this.btnRunScript.Text = "Run Script";
+            this.btnRunScript.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRunScript.UseVisualStyleBackColor = true;
             this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
             // 
@@ -207,11 +231,14 @@
             // 
             // btnAddToSrcipt
             // 
-            this.btnAddToSrcipt.Location = new System.Drawing.Point(19, 311);
+            this.btnAddToSrcipt.Image = global::AutoSelenium.Properties.Resources.if_12___Plus_1815561;
+            this.btnAddToSrcipt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnAddToSrcipt.Location = new System.Drawing.Point(86, 272);
             this.btnAddToSrcipt.Name = "btnAddToSrcipt";
-            this.btnAddToSrcipt.Size = new System.Drawing.Size(98, 45);
+            this.btnAddToSrcipt.Size = new System.Drawing.Size(66, 53);
             this.btnAddToSrcipt.TabIndex = 0;
-            this.btnAddToSrcipt.Text = "Add to script";
+            this.btnAddToSrcipt.Text = "Add";
+            this.btnAddToSrcipt.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAddToSrcipt.UseVisualStyleBackColor = true;
             this.btnAddToSrcipt.Click += new System.EventHandler(this.btnAddToSrcipt_Click);
             // 
@@ -228,7 +255,7 @@
             this.lvScript.TabIndex = 2;
             this.lvScript.UseCompatibleStateImageBehavior = false;
             this.lvScript.View = System.Windows.Forms.View.Details;
-            this.lvScript.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvScript_ItemSelectionChanged);
+            this.lvScript.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvScript_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -294,6 +321,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ToolStripMenuItem scriptToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runToolStripMenuItem;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }
 
